@@ -8,8 +8,8 @@ class IdeaForm extends Component {
     this.handleInput = this.handleInput.bind(this)
     this.handleBlur = this.handleBlur.bind(this)
     this.state = {
-   		title: this.props.idea.title,
-      	body: this.props.idea.body
+   	  title: this.props.idea.title,
+      body: this.props.idea.body
     }
   }
 
@@ -33,7 +33,7 @@ class IdeaForm extends Component {
     return (
       <div className="tile">
         <form onBlur={ this.handleBlur }>
-          <input className='input' type="text" name="title" placeholder='Enter a Title' value={this.state.title} onChange={ this.handleInput } />
+          <input className='input' type="text" name="title" placeholder='Enter a Title' value={this.state.title} onChange={ this.handleInput } ref={this.props.titleRef} />
           <textarea className='input' name="body" placeholder='Describe your idea' value={this.state.body} onChange={ this.handleInput } />
         </form>
       </div>

@@ -13,6 +13,7 @@ class IdeasContainer extends Component {
   		this.updateIdea = this.updateIdea.bind(this)
   		this.resetNotification = this.resetNotification.bind(this)
       this.enableEditing = this.enableEditing.bind(this)
+      this.deleteIdea = this.deleteIdea.bind(this)
   		this.state = {
     		ideas: [],
     		editingIdeaId: null,
@@ -20,15 +21,15 @@ class IdeasContainer extends Component {
   		}
   	}
 
-  	componentDidMount() {
-  		axios.get('http://localhost:3001/api/v1/ideas')
-  			.then(response => {
-    			console.log(response)
-    			this.setState({ideas: response.data})
-  			})
-  			.catch(error => {
-  				console.log(error)
-  			})
+  componentDidMount() {
+  	axios.get('http://localhost:3001/api/v1/ideas')
+  		.then(response => {
+   			console.log(response)
+   			this.setState({ideas: response.data})
+  		})
+  		.catch(error => {
+  			console.log(error)
+  		})
 	}
 
 	addNewIdea() {
@@ -56,19 +57,30 @@ class IdeasContainer extends Component {
   		this.setState({ideas: ideas, notification: 'All changes saved'})
 	}
 
+  deleteIdea(id) {
+    axios.delete(`http://localhost:3001/api/v1/ideas/${id}`)
+      .then(response => {
+        console.log(response)
+        const ideaIndex = this.state.ideas.findIndex(x => x.id === id)
+        const ideas = update(this.state.ideas, { $splice: [[ideaIndex, 1]]})
+        this.setState({ideas: ideas})
+    })
+    .catch(error => console.log(error))
+  }
+
 	resetNotification() {
 		this.setState({ notification: '' })
  	}
 
   enableEditing(id) {
-    this.setState({editingIdeaId: id})
+    this.setState({editingIdeaId: id}, () => { this.title.focus() })
   }
-
+  
 	render() {
 		let ideas = this.state.ideas.map((idea) => {
 				return (this.state.editingIdeaId === idea.id) ? 
-					( <IdeaForm idea={idea} key={idea.id} updateIdea={this.updateIdea} resetNotification={this.resetNotification} /> ) : 
-					( <Idea idea={idea} key={idea.id} onClick={this.enableEditing} /> )
+					( <IdeaForm idea={idea} key={idea.id} updateIdea={this.updateIdea} resetNotification={this.resetNotification} titleRef= {(input) => this.title = input} /> ) : 
+					( <Idea idea={idea} key={idea.id} onClick={this.enableEditing} onDelete={this.deleteIdea} /> )
 	     	});
 
 	    return (
