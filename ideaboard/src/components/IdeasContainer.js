@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Idea from './Idea'
 import IdeaForm from './IdeaForm'
+import IdeaImage from './IdeaImage'
+import IdeaImageAvatar from './IdeaImageAvatar'
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
 
 class IdeasContainer extends Component {
@@ -17,7 +19,9 @@ class IdeasContainer extends Component {
   		this.state = {
     		ideas: [],
     		editingIdeaId: null,
-    		notification: ''
+    		notification: '',
+        step: 1,
+        thread: []
   		}
   	}
 
@@ -75,7 +79,7 @@ class IdeasContainer extends Component {
   enableEditing(id) {
     this.setState({editingIdeaId: id}, () => { this.title.focus() })
   }
-  
+
 	render() {
 		let ideas = this.state.ideas.map((idea) => {
 				return (this.state.editingIdeaId === idea.id) ? 
@@ -85,6 +89,7 @@ class IdeasContainer extends Component {
 
 	    return (
 	    	<div>
+          <IdeaImageAvatar />
 	    		<button className="newIdeaButton" onClick={this.addNewIdea}>New Idea</button>
 	    		<span className="notification">{ this.state.notification }</span>
 	    		<div>

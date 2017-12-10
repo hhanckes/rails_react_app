@@ -5,8 +5,18 @@
   "dependencies": {
     "axios": "^0.17.1",
     "immutability-helper": "^2.6.0",
+    "moment": "^2.19.3",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
+    "react-avatar": "^2.5.1",
+    "react-avatar-edit": "^0.5.8",
+    "react-avatar-editor": "^10.3.0",
+    "react-big-calendar": "^0.17.0",
     "react-dom": "^16.1.1",
+    "react-input-range": "^1.2.2",
+    "react-modal": "^3.1.7",
+    "react-modal-dialog": "^4.0.7",
+    "react-popup": "^0.8.0",
     "react-scripts": "1.0.17"
   },
   "scripts": {
