@@ -36,6 +36,17 @@ function Event({ event }) {
     )
 }
 
+function EventContent({ event }) {
+	return (
+		<div>
+			<strong>
+      			{event.title}
+      		</strong>
+			Estás disponible este bloque que comienza a las {event.start.toString()} y termina a las {event.end.toString()}
+		</div>
+	)
+}
+
 class CalendarForm extends Component {
 	constructor(props) {
 		super(props)
@@ -93,7 +104,7 @@ class CalendarForm extends Component {
 	}
 
 	eventDetailsPopUp(event) {
-		let content = 'Está disponible este bloque que comienza a las X y termina <br/>a las Y'
+		let content = <EventContent event={event} />
 		let popup = Popup.create({
 	    	title: 'Bloque disponible',
 	    	content: content,
