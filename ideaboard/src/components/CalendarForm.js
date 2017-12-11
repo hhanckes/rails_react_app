@@ -2,13 +2,15 @@
 
 //ProfileForm.js
 import React, {Component} from 'react'
-import axios from 'axios'
+//import axios from 'axios'
 import BigCalendar from 'react-big-calendar'; //http://intljusticemission.github.io/react-big-calendar/examples/index.html#intro
 import moment from 'moment';
+import Moment from 'react-moment';
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
 import '/Users/hans/Sites/rails_react_app/ideaboard/node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import './CalendarForm.css';
 import Popup from 'react-popup'; //http://minutemailer.github.io/react-popup/
+import 'moment/locale/es';
 
 moment.locale('ko', {
     week: {
@@ -41,8 +43,8 @@ function EventContent({ event }) {
 		<div>
 			<p>Estás disponible este bloque horario:</p>
 			<ul>
-				<li>Inicio: {event.start.toString()}</li>
-				<li>Fin:{event.end.toString()}</li>
+				<li>Inicio: <b><Moment locale="es" format="dddd HH:mm">{event.start}</Moment></b></li>
+				<li>Fin: <b><Moment locale="es" format="dddd HH:mm">{event.end}</Moment></b></li>
 			</ul>
 			<p>Esto significa que tomaremos reservas que comiencen alrededor del horario de inicio y temrinen (en función de la duración del servicio) no más allá de 30 minutos de la hora de fin de este bloque.</p>
 		</div>
@@ -93,7 +95,7 @@ class CalendarForm extends Component {
 
 	eventDetailsPopUp(event) {
 		let content = <EventContent event={event} />
-		let popup = Popup.create({
+		Popup.create({
 	    	title: 'Bloque disponible',
 	    	content: content,
 	    	buttons: {
@@ -147,6 +149,7 @@ class CalendarForm extends Component {
 			    min={minTime}
 			    max={maxTime}
 			    formats={formats}
+				culture='es'
 			    defaultDate={new Date()}
 			    components={{
 			            event: Event
