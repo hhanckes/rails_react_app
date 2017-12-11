@@ -39,10 +39,12 @@ function Event({ event }) {
 function EventContent({ event }) {
 	return (
 		<div>
-			<strong>
-      			{event.title}
-      		</strong>
-			Estás disponible este bloque que comienza a las {event.start.toString()} y termina a las {event.end.toString()}
+			<p>Estás disponible este bloque horario:</p>
+			<ul>
+				<li>Inicio: {event.start.toString()}</li>
+				<li>Fin:{event.end.toString()}</li>
+			</ul>
+			<p>Esto significa que tomaremos reservas que comiencen alrededor del horario de inicio y temrinen (en función de la duración del servicio) no más allá de 30 minutos de la hora de fin de este bloque.</p>
 		</div>
 	)
 }
@@ -53,21 +55,7 @@ class CalendarForm extends Component {
 		this.eventDetailsPopUp = this.eventDetailsPopUp.bind(this)
 		this.removeEvent = this.removeEvent.bind(this)
 		this.state = {
-			eventsList: [
-			    {
-			    	id: 1,
-			        title: 'Meeting',
-			        start: new Date(2017, 11, 7, 10, 30, 0, 0),
-			        end: new Date(2017, 11, 7, 12, 30, 0, 0),
-			        desc: 'Pre-meeting meeting, to prepare for the meeting'
-			    },
-			    {
-			    	id: 2,
-			        title: 'Lunch',
-			        start:new Date(2017, 11, 5, 12, 0, 0, 0),
-			        end: new Date(2017, 11, 5, 13, 0, 0, 0),
-			        desc: 'Power lunch'
-			    }],
+			eventsList: [],
 			eventLastCreatedID: 3
 		}
 	}
