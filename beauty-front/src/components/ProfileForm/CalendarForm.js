@@ -7,8 +7,8 @@ import BigCalendar from 'react-big-calendar'; //http://intljusticemission.github
 import moment from 'moment';
 import Moment from 'react-moment';
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
-import './CalendarForm.css';
 import Popup from 'react-popup'; //http://minutemailer.github.io/react-popup/
+import './CalendarForm.css';
 import 'moment/locale/es';
 
 moment.locale('ko', {
@@ -132,28 +132,28 @@ class CalendarForm extends Component {
 		}
 
 		return (
-			<div style={{width:'70%', margin:'0 auto', fontSize:'11px'}}>
-			<Popup />
-		    <BigCalendar
-			    selectable
-			    onSelectEvent={event => this.onEventClick(event)}
-			    onSelectSlot={(slotInfo) => this.onSlotChange(slotInfo) }
-			    events={this.state.eventsList}
-			    step={30}
-			    timeslots={2}
-			    defaultView='week'
-			    views={['week']}
-			    toolbar={false}
-			    min={minTime}
-			    max={maxTime}
-			    formats={formats}
-				culture='es'
-			    defaultDate={new Date()}
-			    components={{
-			            event: Event
-			    }}
-			 />
-		  </div>	
+			<div>
+				<Popup />
+			    <BigCalendar
+				    selectable
+				    onSelectEvent={event => this.onEventClick(event)}
+				    onSelectSlot={(slotInfo) => this.onSlotChange(slotInfo) }
+				    events={this.state.eventsList}
+				    step={30}
+				    timeslots={2}
+				    defaultView='week'
+				    views={['week']}
+				    toolbar={false}
+				    min={minTime}
+				    max={maxTime}
+				    formats={formats}
+					culture='es'
+				    defaultDate={new Date()}
+				    components={{
+				            event: Event
+				    }}
+				 />
+		  	</div>	
         )
 	}
 }
