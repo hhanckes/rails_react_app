@@ -3,8 +3,7 @@
 import React, { Component } from 'react';
 import './App.css';
 //import IdeasContainer from './components/IdeasContainer'
-//import ProfileForm   from './components/ProfileForm'
-import CalendarForm from './components/CalendarForm'
+import ProfileForm from './components/ProfileForm/ProfileForm'
 
 class App extends Component {
   render() {
@@ -13,7 +12,7 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">Idea Board</h1>
         </header>
-        <CalendarForm />
+        <ProfileForm />
       </div>
     );
   }

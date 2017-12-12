@@ -2,7 +2,7 @@
 import React, { Component } from 'react'
 import Avatar from 'react-avatar-edit' //https://www.npmjs.com/package/react-avatar-edit
 
-class IdeaImageAvatar extends Component {
+class ProfileAvatar extends Component {
 	constructor(props) {
     	super(props)
     	this.state = {
@@ -24,22 +24,15 @@ class IdeaImageAvatar extends Component {
   
 	render () {
 	    return (
-	      <div>
-		    <div style={{float:'left'}}>
-		        <Avatar
-		          width={390}
-		          height={295}
-		          onCrop={this.onCrop}
-		          onClose={this.onClose}
-		          src={this.state.src}
-		        />
-	        </div>
-	        <div>
-	        	<img src={this.state.preview} alt="Preview" />
-	        </div>
-	      </div>
+	        <Avatar
+	          width={300}
+	          height={300}
+	          onCrop={this.onCrop}
+	          onClose={this.onClose}
+	          src={this.state.src}
+	        />
 	    )
 	}
 }
 
-export default IdeaImageAvatar;
+export default ProfileAvatar;

@@ -6,7 +6,6 @@ import axios from 'axios'
 import BigCalendar from 'react-big-calendar'; //http://intljusticemission.github.io/react-big-calendar/examples/index.html#intro
 import moment from 'moment';
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
-import '/Users/hans/Sites/rails_react_app/ideaboard/node_modules/react-big-calendar/lib/css/react-big-calendar.css';
 import './CalendarForm.css';
 import Popup from 'react-popup'; //http://minutemailer.github.io/react-popup/
 
@@ -19,7 +18,6 @@ moment.locale('ko', {
 // Setup the localizer by providing the moment (or globalize) Object
 // to the correct localizer.
 BigCalendar.momentLocalizer(moment); // or globalizeLocalizer
-
 
 /*Agenda Rendering*/
 //Outside the class
@@ -132,27 +130,27 @@ class CalendarForm extends Component {
 		}
 
 		return (
-			<div style={{width:'70%', margin:'0 auto', fontSize:'11px'}}>
-			<Popup />
-		    <BigCalendar
-			    selectable
-			    onSelectEvent={event => this.onEventClick(event)}
-			    onSelectSlot={(slotInfo) => this.onSlotChange(slotInfo) }
-			    events={this.state.eventsList}
-			    step={30}
-			    timeslots={2}
-			    defaultView='week'
-			    views={['week']}
-			    toolbar={false}
-			    min={minTime}
-			    max={maxTime}
-			    formats={formats}
-			    defaultDate={new Date()}
-			    components={{
-			            event: Event
-			    }}
-			 />
-		  </div>	
+			<div>
+				<Popup />
+			    <BigCalendar
+				    selectable
+				    onSelectEvent={event => this.onEventClick(event)}
+				    onSelectSlot={(slotInfo) => this.onSlotChange(slotInfo) }
+				    events={this.state.eventsList}
+				    step={30}
+				    timeslots={2}
+				    defaultView='week'
+				    views={['week']}
+				    toolbar={false}
+				    min={minTime}
+				    max={maxTime}
+				    formats={formats}
+				    defaultDate={new Date()}
+				    components={{
+				            event: Event
+				    }}
+				 />
+		  	</div>	
         )
 	}
 }

@@ -1,7 +1,9 @@
 //ProfileForm.js
 import React, { Component } from 'react'
 import axios from 'axios'
-import IdeaImageAvatar from './IdeaImageAvatar'
+import ProfileAvatar from './ProfileAvatar'
+import CalendarForm from './CalendarForm'
+import ProfileServicesForm from './ProfileServicesForm'
 
 class ProfileForm extends Component {
 	constructor(props) {
@@ -9,7 +11,6 @@ class ProfileForm extends Component {
 		this.onClickSaveProfile = this.onClickSaveProfile.bind(this)
 		this.handleInput = this.handleInput.bind(this)
 		this.handleImageChange = this.handleImageChange.bind(this)
-		
 		
 		this.state = {
 			name: '',
@@ -36,11 +37,21 @@ class ProfileForm extends Component {
 
 	render() {
 		return (
-			<div>
-				<IdeaImageAvatar onImageChange={this.handleImageChange}/>
+			<div style={{width:'70%', margin:'0 auto', fontSize:'11px'}}>
+				<h1>Imagen de Perfil</h1>
+				<ProfileAvatar onImageChange={this.handleImageChange}/>
+				<h1>Datos</h1>
 				<div>
 					<input type="text" name="name" placeholder='Enter your name' value={this.state.name} onChange={ this.handleInput } /><br />
-          			<textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } />
+	          		<textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } />
+				</div>
+				<h1>Servicios Ofrecidos</h1>
+					<ProfileServicesForm />
+				<h1>Disponibilidad</h1>
+				<div>
+					<CalendarForm />
+				</div>
+				<div>
 					<button className="saveProfile" onClick={this.onClickSaveProfile}>Save Profile</button>
 				</div>
 			</div>
