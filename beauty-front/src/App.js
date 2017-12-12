@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-//import IdeasContainer from './components/IdeasContainer'
+import IdeasContainer from './components/ProfileForm/IdeasContainer'
 import ProfileForm from './components/ProfileForm/ProfileForm'
 
 class App extends Component {

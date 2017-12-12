@@ -25,3 +25,49 @@ ideas = Idea.create(
       body: "Like Uno but involves drinking"
     }
   ])
+
+serviceCategories = ServiceCategory.create(
+  [
+    {
+      name: "Servicios",
+      description: "Made of chocolate"
+    },
+    {
+      name: "Maquillajes",
+      description: "Only for replying to mentions and DMs"
+    },
+    {
+      name: "Masajes",
+      description: "Only for replying to mentions and DMs"
+    }
+  ])
+
+serviceCategories = Service.create(
+  [
+    {
+      name: "Barbería",
+      description: "Corte de barba",
+      service_category_id: ServiceCategory.find_by_name('Servicios').id
+    },
+    {
+      name: "Peluquería",
+      description: "Corte de pelo",
+      service_category_id: ServiceCategory.find_by_name('Servicios').id
+    },
+    {
+      name: "Maquillajes de novia",
+      description: "Only for replying to mentions and DMs",
+      service_category_id: ServiceCategory.find_by_name('Maquillajes').id
+    },
+    {
+      name: "Maquillaje general",
+      description: "Para la noche",
+      service_category_id: ServiceCategory.find_by_name('Maquillajes').id
+    },
+    {
+      name: "Masajes de relajación",
+      description: "Para relajarte",
+      service_category_id: ServiceCategory.find_by_name('Masajes').id
+    }
+  ])
+

@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Idea from './Idea'
 import IdeaForm from './IdeaForm'
-import IdeaImage from './IdeaImage'
-import IdeaImageAvatar from './IdeaImageAvatar'
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
 
 class IdeasContainer extends Component {
@@ -89,7 +87,6 @@ class IdeasContainer extends Component {
 
 	    return (
 	    	<div>
-          <IdeaImageAvatar />
 	    		<button className="newIdeaButton" onClick={this.addNewIdea}>New Idea</button>
 	    		<span className="notification">{ this.state.notification }</span>
 	    		<div>
