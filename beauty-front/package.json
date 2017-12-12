@@ -16,6 +16,7 @@
     "react-input-range": "^1.2.2",
     "react-modal": "^3.1.7",
     "react-modal-dialog": "^4.0.7",
+    "react-moment": "^0.6.8",
     "react-popup": "^0.8.0",
     "react-scripts": "1.0.17"
   },
