@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ProfileAvatar from './ProfileAvatar'
 import CalendarForm from './CalendarForm'
-import ProfileServicesForm from './ProfileServicesForm'
+import ProfileServicesForm2 from './ProfileServicesForm2'
 
 class ProfileForm extends Component {
 	constructor(props) {
@@ -46,7 +46,7 @@ class ProfileForm extends Component {
 	          		<textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } />
 				</div>
 				<h1>Servicios Ofrecidos</h1>
-					<ProfileServicesForm />
+					<ProfileServicesForm2 />
 				<h1>Disponibilidad</h1>
 				<div>
 					<CalendarForm />
