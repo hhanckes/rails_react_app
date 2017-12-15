@@ -1,5 +1,7 @@
 //ServiceDetailForm.js
 import React, { Component } from 'react'
+import { Button } from 'react-bootstrap';
+import ServiceProductsUsedDetailForm from './ServiceProductsUsedDetailForm'
 
 class ServiceDetailForm extends Component {
     constructor(props) {
@@ -7,13 +9,13 @@ class ServiceDetailForm extends Component {
 		this.onChange = this.onChange.bind(this)
         this.onSave = this.onSave.bind(this)
         this.state = {
-            value: ''
+            price: '',
+            time: 0
         };
     }
 
     onChange(e) {
-        let value = e.target.value;
-        this.setState({value: value});
+        this.setState({[e.target.name]: e.target.value});
     }
 
     onSave() {
@@ -24,10 +26,14 @@ class ServiceDetailForm extends Component {
     render() {
         return ( 
         	<div>
-                <h1>{ this.props.serviceName }</h1>
-        		<p>Precio del servicio: <input type="text" placeholder='Precio' className="mm-popup__input" onChange={this.onChange} /></p>
-        		<p>Duración (minutos): <input type="text" placeholder='Duración del servicio' className="mm-popup__input" onChange={this.onChange} /></p>
-                <button className="button" onClick={this.onSave}>Guardar</button>
+        		<p>Precio del servicio: <input type="text" placeholder='Precio' name="price" className="mm-popup__input" onChange={this.onChange} /></p>
+        		<p>Duración (minutos): <input type="text" placeholder='Duración del servicio' name="time" className="mm-popup__input" onChange={this.onChange} /></p>
+                <hr />
+                <ServiceProductsUsedDetailForm />
+                <hr />
+                <p>Fotos del servicio para tener de referencia:</p>
+                <p>-completar-</p>
+                <Button className="button" bsStyle="primary" onClick={this.onSave}>Guardar</Button>
         	</div>
         )
     }
