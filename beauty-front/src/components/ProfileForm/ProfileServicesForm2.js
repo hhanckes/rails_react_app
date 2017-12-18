@@ -14,18 +14,18 @@ class ProfileServicesForm2 extends Component {
 		this.onCloseModal = this.onCloseModal.bind(this)
 		this.state = {
     		selectedServicesId: [],
+    		selectedServicesData: [],
     		openModalId: 0,
-    		services: [],
-    		test: 1
+    		services: []
   		}
 	}
 
 	openModal(id) {
-		this.setState({ openModalId: id, test: 1 })
+		this.setState({ openModalId: id })
 	}
 
 	onCloseModal() {
-		this.setState({ openModalId: 0, test: 2 })
+		this.setState({ openModalId: 0 })
 	}
 
 	componentDidMount() {
@@ -38,16 +38,30 @@ class ProfileServicesForm2 extends Component {
   		})
 	}
 
-	handleAddService(serviceId) {
+	handleAddService(serviceDetail) {
+		let serviceId = serviceDetail.id
+
 		if(!this.state.selectedServicesId.includes(serviceId)) {
-	    	let selectedServicesId = update(this.state.selectedServicesId, {
-      				$splice: [[0, 0, serviceId]] //splice() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
+	    	const selectedServicesId = update(this.state.selectedServicesId, {
+      				$splice: [[0, 0, serviceId]]
+    			})
+			const selectedServicesData = update(this.state.selectedServicesData, {
+      				$splice: [[0, 0, serviceDetail]]
     			})
 	    	this.setState({
 	    			openModalId: 0,
-    				selectedServicesId: selectedServicesId
+    				selectedServicesId: selectedServicesId,
+    				selectedServicesData: selectedServicesData
     			})
-		} else {
+		} else if (this.state.selectedServicesId.includes(serviceId) && !this.state.selectedServicesData.includes(serviceDetail)) {
+			const index = this.state.selectedServicesData.findIndex(x => x.id === serviceDetail.id)
+        	const selectedServicesData = update(this.state.selectedServicesData, { $splice: [[index, 0, serviceDetail]]})
+        	this.setState({
+	    			openModalId: 0,
+    				selectedServicesData: selectedServicesData
+    			})
+		}
+		else {
 			this.setState({
     					openModalId: 0
     				})
@@ -67,20 +81,21 @@ class ProfileServicesForm2 extends Component {
 							{ 	serviceCategory.services.map((service) => {
 									return (
 										<div>
-										<li key={ service.id } onClick={ this.handleClick.bind(this, service.id) }>
-											{ this.state.selectedServicesId.includes(service.id) ?  '--> '+service.name : service.name }
-										</li>
-										<Modal key={`Modal${service.id}`} show={ this.state.openModalId === service.id } onHide={ this.onCloseModal }>
-								          <Modal.Header closeButton>
-								            <Modal.Title>Agrear servicio de {service.name}</Modal.Title>
-								          </Modal.Header>
-								          <Modal.Body>
-								            <ServiceDetailForm key={ service.name } serviceId={service.id} serviceName={ service.name } onSaveService={this.handleAddService} />
-								          </Modal.Body>
-								          <Modal.Footer>
-								            <Button onClick={ this.onCloseModal }>Close</Button>
-								          </Modal.Footer>
-								        </Modal>
+											<li key={ service.id } onClick={ this.handleClick.bind(this, service.id) }>
+												{ this.state.selectedServicesId.includes(service.id) ?  '--> '+service.name : service.name }
+											</li>
+											<Modal key={`Modal${service.id}`} show={ this.state.openModalId === service.id } onHide={ this.onCloseModal }>
+									          <Modal.Header closeButton>
+									            <Modal.Title>Agrear servicio de {service.name}</Modal.Title>
+									          </Modal.Header>
+									          <Modal.Body>
+									            <ServiceDetailForm key={ service.name } serviceId={service.id} serviceName={ service.name } onSaveService={this.handleAddService} 
+									            	data={this.state.selectedServicesId.includes(service.id) ? this.state.selectedServicesData.find(x => x.id === service.id) : ''} />
+									          </Modal.Body>
+									          <Modal.Footer>
+									            <Button onClick={ this.onCloseModal }>Close</Button>
+									          </Modal.Footer>
+									        </Modal>
 								        </div>
 										)
 								})

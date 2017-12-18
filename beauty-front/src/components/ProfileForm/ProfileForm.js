@@ -15,6 +15,7 @@ class ProfileForm extends Component {
 		this.state = {
 			name: '',
 			brief: '',
+			constrains: '',
 			picture: ''
 		}
 	}
@@ -43,11 +44,13 @@ class ProfileForm extends Component {
 				<h1>Datos</h1>
 				<div>
 					<input type="text" name="name" placeholder='Enter your name' value={this.state.name} onChange={ this.handleInput } /><br />
-	          		<textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } />
+	          		<textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } /><br />
+	          		<textarea name="constrains" placeholder='Condiciones específicas como, tener estacionamiento u otro' value={this.state.constrains} onChange={ this.handleInput } />
 				</div>
 				<h1>Servicios Ofrecidos</h1>
 					<ProfileServicesForm2 />
 				<h1>Disponibilidad</h1>
+				<p>Estos serán los bloques de horarios en los cuales aceptaremos reservas</p>
 				<div>
 					<CalendarForm />
 				</div>
