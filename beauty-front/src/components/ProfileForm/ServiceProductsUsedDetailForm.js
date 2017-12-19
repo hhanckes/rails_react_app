@@ -8,6 +8,7 @@ class ServiceProductsUsedDetailForm extends Component {
         super(props);
         this.onAddProduct = this.onAddProduct.bind(this)
         this.addNewProduct = this.addNewProduct.bind(this)
+        this.onRemoveProduct = this.onRemoveProduct.bind(this)
     }
 
     onAddProduct(state) {
@@ -18,16 +19,20 @@ class ServiceProductsUsedDetailForm extends Component {
         this.props.onAddNewProduct();
     }
 
+    onRemoveProduct(state) {
+        this.props.onRemoveProduct(state);   
+    }
+
     render() {
         let products = this.props.products.map( (prod) => {
             return (
-                    <ServiceProductUsedForm key={ prod.index } index={ prod.index } onAddProduct={this.onAddProduct} />
+                    <ServiceProductUsedForm key={ prod.index } index={ prod.index } onAddProduct={this.onAddProduct} onRemoveProduct={this.onRemoveProduct} />
                 )
         })
 
         return ( 
         	<div>
-        		<p>Productos utilizados para realizar este servicio:</p>
+        		<p>Marcas de los productos utilizados para realizar este servicio:</p>
                 { products }
                 <p><Button className="button" bsStyle="primary" bsSize="xsmall" onClick={this.addNewProduct}>Agregar Producto</Button></p>
         	</div>

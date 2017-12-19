@@ -7,8 +7,9 @@ class ServiceProductUsedForm extends Component {
         super(props);
 		this.onChange = this.onChange.bind(this)
 		this.onAddProduct = this.onAddProduct.bind(this)
+        this.onDelete = this.onDelete.bind(this)
+
         this.state = {
-            name: '',
             brand: '',
             index: this.props.index
         };
@@ -23,17 +24,13 @@ class ServiceProductUsedForm extends Component {
     }
 
     onDelete() {
-    	
+    	this.props.onRemoveProduct(this.state)
     }
 
     render() {
         return ( 
         	<div>
                 <p>
-                	<span>
-                		Nombre: 
-                		<input type="text" placeholder='Ejemplo: Base' name="name" value={ this.state.name } onChange={this.onChange} /> 
-                	</span>
                 	<span style={{marginLeft:'10px'}}>
                 		Marca: 
                 		<input type="text" placeholder='Ejemplo: Bobby Brown' name="brand" value={ this.state.brand } onChange={this.onChange} />

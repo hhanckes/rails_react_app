@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ProfileAvatar from './ProfileAvatar'
 import CalendarForm from './CalendarForm'
-import ProfileServicesForm2 from './ProfileServicesForm2'
+import ProfileServicesForm from './ProfileServicesForm'
 
 class ProfileForm extends Component {
 	constructor(props) {
@@ -11,12 +11,16 @@ class ProfileForm extends Component {
 		this.onClickSaveProfile = this.onClickSaveProfile.bind(this)
 		this.handleInput = this.handleInput.bind(this)
 		this.handleImageChange = this.handleImageChange.bind(this)
+		this.handleAddService = this.handleAddService.bind(this)
+		this.handleAddAvailability = this.handleAddAvailability.bind(this)
 		
 		this.state = {
 			name: '',
 			brief: '',
 			constrains: '',
-			picture: ''
+			picture: '',
+			services: [],
+			availabilities: []
 		}
 	}
 
@@ -26,6 +30,14 @@ class ProfileForm extends Component {
 
   	handleImageChange(imageSrc) {
 		this.setState({picture: imageSrc})
+  	}
+
+  	handleAddService() {
+
+  	}
+
+  	handleAddAvailability() {
+
   	}
 
 	onClickSaveProfile() {
@@ -43,16 +55,16 @@ class ProfileForm extends Component {
 				<ProfileAvatar onImageChange={this.handleImageChange}/>
 				<h1>Datos</h1>
 				<div>
-					<input type="text" name="name" placeholder='Enter your name' value={this.state.name} onChange={ this.handleInput } /><br />
-	          		<textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } /><br />
-	          		<textarea name="constrains" placeholder='Condiciones específicas como, tener estacionamiento u otro' value={this.state.constrains} onChange={ this.handleInput } />
+					Nombre: <input type="text" name="name" placeholder='Enter your name' value={this.state.name} onChange={ this.handleInput } /><br />
+	          		Descripción general: <textarea name="brief" placeholder='Describe yourself' value={this.state.brief} onChange={ this.handleInput } /><br />
+	          		Condiciones generales: <textarea name="constrains" placeholder='Condiciones específicas como, tener estacionamiento u otro' value={this.state.constrains} onChange={ this.handleInput } />
 				</div>
 				<h1>Servicios Ofrecidos</h1>
-					<ProfileServicesForm2 />
+					<ProfileServicesForm onAddService={this.handleAddService} />
 				<h1>Disponibilidad</h1>
 				<p>Estos serán los bloques de horarios en los cuales aceptaremos reservas</p>
 				<div>
-					<CalendarForm />
+					<CalendarForm onAddAvailability={this.handleAddAvailability} />
 				</div>
 				<div>
 					<button className="saveProfile" onClick={this.onClickSaveProfile}>Save Profile</button>

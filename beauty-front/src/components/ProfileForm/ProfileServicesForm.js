@@ -5,7 +5,7 @@ import ServiceDetailForm from './ServiceDetailForm'
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
 import { Modal, Button } from 'react-bootstrap';
 
-class ProfileServicesForm2 extends Component {
+class ProfileServicesForm extends Component {
 	constructor(props) {
 		super(props)
 		this.handleClick = this.handleClick.bind(this)
@@ -68,6 +68,10 @@ class ProfileServicesForm2 extends Component {
 		}
 	}
 
+	onAddService() {
+		this.props.handleAddService()
+	}
+
 	handleClick(id) {
 		this.openModal(id);
 	}
@@ -89,11 +93,22 @@ class ProfileServicesForm2 extends Component {
 									            <Modal.Title>Agrear servicio de {service.name}</Modal.Title>
 									          </Modal.Header>
 									          <Modal.Body>
-									            <ServiceDetailForm key={ service.name } serviceId={service.id} serviceName={ service.name } onSaveService={this.handleAddService} 
-									            	data={this.state.selectedServicesId.includes(service.id) ? this.state.selectedServicesData.find(x => x.id === service.id) : ''} />
+													//TODO//
+													<p>Descripción general del servicio:</p>
+													<textarea placeholder="Lo hago con mucho cariño" />
+													<hr />
+													<p>Precio del servicio: <input type="text" placeholder='Precio' name="price" value={ this.state.price } onChange={this.onChange} /></p>
+													<p>Duración (minutos): <input type="text" placeholder='Duración del servicio' value={ this.state.time } name="time" onChange={this.onChange} /></p>
+													<hr />
+													<ServiceProductsUsedDetailForm onAddProduct={this.handleAddProduct} onAddNewProduct={this.handleAddNewProduct} onRemoveProduct={this.handleRemoveProduct} products={this.state.products}/>
+													<hr />
+													<p>Fotos del servicio para tener de referencia:</p>
+													<MultipleImagesUploader onAddPicture={ this.handleAddPicture } />
+													<Button className="button" bsStyle="primary" onClick={this.onSave}>Guardar</Button>
 									          </Modal.Body>
 									          <Modal.Footer>
 									            <Button onClick={ this.onCloseModal }>Close</Button>
+									            <Button bsStyle="primary" onClick={ this.onAddService }>Save changes</Button>
 									          </Modal.Footer>
 									        </Modal>
 								        </div>
@@ -113,4 +128,4 @@ class ProfileServicesForm2 extends Component {
 	}
 }
 
-export default ProfileServicesForm2
+export default ProfileServicesForm
