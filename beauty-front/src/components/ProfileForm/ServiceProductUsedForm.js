@@ -10,7 +10,7 @@ class ServiceProductUsedForm extends Component {
         this.onDelete = this.onDelete.bind(this)
 
         this.state = {
-            brand: '',
+            brand: this.props.brand,
             index: this.props.index
         };
     }

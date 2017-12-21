@@ -1,6 +1,6 @@
 //ServiceDetailForm.js
 import React, { Component } from 'react'
-import { Button } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
 import ServiceProductsUsedDetailForm from './ServiceProductsUsedDetailForm'
 import MultipleImagesUploader from './MultipleImagesUploader'
@@ -15,10 +15,11 @@ class ServiceDetailForm extends Component {
         this.handleRemoveProduct = this.handleRemoveProduct.bind(this)
         this.handleAddPicture = this.handleAddPicture.bind(this)
         this.state = {
+            description: this.props.data.description,
             price: this.props.data.price,
             time: this.props.data.time,
             id: this.props.serviceId,
-            products: [],
+            products: (this.props.data.products ? this.props.data.products : []),
             images: []
         };
     }
@@ -28,9 +29,9 @@ class ServiceDetailForm extends Component {
     }
 
     onSave() {
-        //Call API to add service
         this.props.onSaveService(this.state)
     }
+
 
     handleAddProduct(value) {
         const products = update(this.state.products, {
@@ -71,19 +72,24 @@ class ServiceDetailForm extends Component {
     }
 
     render() {
-        return ( 
-        	<div>
-                <p>Descripción general del servicio:</p>
-                <textarea placeholder="Lo hago con mucho cariño" />
-        		<hr />
-                <p>Precio del servicio: <input type="text" placeholder='Precio' name="price" value={ this.state.price } onChange={this.onChange} /></p>
-        		<p>Duración (minutos): <input type="text" placeholder='Duración del servicio' value={ this.state.time } name="time" onChange={this.onChange} /></p>
-                <hr />
-                <ServiceProductsUsedDetailForm onAddProduct={this.handleAddProduct} onAddNewProduct={this.handleAddNewProduct} onRemoveProduct={this.handleRemoveProduct} products={this.state.products}/>
-                <hr />
-                <p>Fotos del servicio para tener de referencia:</p>
-                <MultipleImagesUploader onAddPicture={ this.handleAddPicture } />
-                <Button className="button" bsStyle="primary" onClick={this.onSave}>Guardar</Button>
+        return (
+            <div>
+                <Modal.Body>
+                    <p>Descripción general del servicio:</p>
+                    <textarea placeholder="Lo hago con mucho cariño" name="description" value={ this.state.description } onChange={this.onChange} />
+                    <hr />
+                    <p>Precio del servicio: <input type="text" placeholder='Precio' name="price" value={ this.state.price } onChange={this.onChange} /></p>
+                    <p>Duración (minutos): <input type="text" placeholder='Duración del servicio' value={ this.state.time } name="time" onChange={this.onChange} /></p>
+                    <hr />
+                    <ServiceProductsUsedDetailForm onAddProduct={this.handleAddProduct} onAddNewProduct={this.handleAddNewProduct} onRemoveProduct={this.handleRemoveProduct} products={this.state.products}/>
+                    <hr />
+                    <p>Fotos del servicio para tener de referencia:</p>
+                    <MultipleImagesUploader onAddPicture={ this.handleAddPicture } />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={ this.props.onClose }>Close</Button>
+                    <Button bsStyle="primary" onClick={ this.onSave }>Guardar</Button>
+                </Modal.Footer>
         	</div>
         )
     }

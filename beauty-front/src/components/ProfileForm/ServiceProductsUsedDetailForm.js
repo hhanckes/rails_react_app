@@ -26,7 +26,7 @@ class ServiceProductsUsedDetailForm extends Component {
     render() {
         let products = this.props.products.map( (prod) => {
             return (
-                    <ServiceProductUsedForm key={ prod.index } index={ prod.index } onAddProduct={this.onAddProduct} onRemoveProduct={this.onRemoveProduct} />
+                    <ServiceProductUsedForm key={ prod.index } index={ prod.index } brand={prod.brand} onAddProduct={this.onAddProduct} onRemoveProduct={this.onRemoveProduct} />
                 )
         })
 
