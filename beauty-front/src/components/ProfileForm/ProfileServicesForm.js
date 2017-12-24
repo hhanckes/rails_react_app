@@ -42,6 +42,8 @@ class ProfileServicesForm extends Component {
 	}
 
 	handleAddService(serviceDetail) {
+		this.props.onAddService(serviceDetail)
+
 		let serviceData = this.state.selectedServicesData.find(x => x.id === serviceDetail.id)
 
 		if(!serviceData) {

@@ -73,6 +73,7 @@ class CalendarForm extends Component {
 	    let eventsList = update(this.state.eventsList, {
       			$splice: [[0, 0, newEvent]] //splice() https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice
     		})
+	   	this.props.onAddAvailability(eventsList)
 	    this.setState({
     			eventsList: eventsList,
     			eventLastCreatedID: newId
@@ -88,6 +89,7 @@ class CalendarForm extends Component {
 	removeEvent(id) {
 		const eventIndex = this.state.eventsList.findIndex(x => x.id === id)
 		const eventsList = update(this.state.eventsList, { $splice: [[eventIndex, 1]]})
+		this.props.onAddAvailability(eventsList)
 		this.setState({eventsList: eventsList})
 	}
 
