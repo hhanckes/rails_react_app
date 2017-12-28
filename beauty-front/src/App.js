@@ -2,9 +2,9 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import IdeasContainer from './components/ProfileForm/IdeasContainer'
-import ProfileForm from './components/ProfileForm/ProfileForm'
+import Menu from './components/Menu';
 import Helmet from "react-helmet";
+
 
 class App extends Component {
   render() {
@@ -16,9 +16,9 @@ class App extends Component {
         </Helmet>
         <div className="App" id="app">
           <header className="App-header">
-            <h1 className="App-title">Idea Board</h1>
+            <h1 className="App-title">Beauty Everywhere</h1>
           </header>
-          <ProfileForm />
+          <Menu />
         </div>
       </div>
     );

@@ -6,7 +6,7 @@ module Api::V1
     def index
       @profiles = Profile.all
 
-      render json: @profiles
+      render json: @profiles.to_json(include: :service_details)
     end
 
     # GET /profiles/1
