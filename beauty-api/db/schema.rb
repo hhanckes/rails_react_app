@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171228020102) do
+ActiveRecord::Schema.define(version: 20171228161925) do
 
   create_table "brands", force: :cascade do |t|
     t.integer "service_detail_id"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20171228020102) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "picture"
+    t.text "restrictions"
   end
 
   create_table "service_categories", force: :cascade do |t|
@@ -41,8 +42,16 @@ ActiveRecord::Schema.define(version: 20171228020102) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "service_details" because of following StandardError
-#   Unknown type 'json' for column 'photos'
+  create_table "service_details", force: :cascade do |t|
+    t.integer "profile_id"
+    t.integer "service_id"
+    t.text "description"
+    t.float "price"
+    t.integer "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "photos"
+  end
 
   create_table "services", force: :cascade do |t|
     t.string "name"

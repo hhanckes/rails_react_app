@@ -70,7 +70,7 @@ class ProfileForm extends Component {
 		return (
 			<div style={{width:'70%', margin:'0 auto', fontSize:'11px'}}>
 				<h1>Imagen de Perfil</h1>
-				<ProfileAvatar onImageChange={this.handleImageChange} />
+				<ProfileAvatar onImageChange={ this.handleImageChange } />
 				<h1>Datos</h1>
 				<div>
 					Nombre: <input type="text" name="name" placeholder='Enter your name' value={this.state.name} onChange={ this.handleInput } /><br />

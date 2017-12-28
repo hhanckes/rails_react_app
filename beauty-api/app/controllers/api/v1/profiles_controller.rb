@@ -17,6 +17,14 @@ module Api::V1
     # POST /profiles
     def create
       @profile = Profile.new(profile_params)
+      @profile.service_details.build(service_detail_params)
+
+      puts 'profile_params'
+      puts profile_params
+      puts 'service_detail_params'
+      puts service_detail_params
+      puts 'availability_params'
+      puts availability_params
 
       if @profile.save
         render json: @profile, status: :created
@@ -47,7 +55,17 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def profile_params
-        params.require(:profile).permit(:name, :brief, :picture)
+        params.permit(:name, :brief, :restrictions, :picture)
+      end
+
+      def service_detail_params
+        params.require(:services).map do |p|
+          ActionController::Parameters.new(p).permit(:price, :time)
+        end
+      end
+
+      def availability_params
+        params.require(:availabilities)
       end
   end
 end
