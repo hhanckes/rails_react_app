@@ -20,8 +20,8 @@ class ProfileForm extends Component {
 			brief: '',
 			restrictions: '',
 			picture: '',
-			services: [],
-			availabilities: []
+			service_details_attributes: [],
+			availabilities_attributes: []
 		}
 	}
 
@@ -34,27 +34,27 @@ class ProfileForm extends Component {
   	}
 
   	handleAddService(serviceDetail) {
-		let serviceData = this.state.services.find(x => x.id === serviceDetail.id)
+		let serviceData = this.state.service_details_attributes.find(x => x.id === serviceDetail.id)
 
 		if(!serviceData) {
 			const services = update(this.state.services, {
       				$splice: [[0, 0, serviceDetail]]
     			})
 	    	this.setState({
-    				services: services
+    				service_details_attributes: services
     			})
 		} else {
 			const index = this.state.services.findIndex(x => x.id === serviceDetail.id)
         	const services = update(this.state.services, { $splice: [[index, 0, serviceDetail]]})
         	this.setState({
-    				services: services
+    				service_details_attributes: services
     			})
 		}
   	}
 
   	handleAddAvailability(newEventList) {
 		this.setState({
-    				availabilities: newEventList
+    				availabilities_attributes: newEventList
     			})
   	}
 
