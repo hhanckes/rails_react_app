@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-  resources :service_details
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   namespace :api do
     namespace :v1 do
      	resources :ideas
-		resources :profiles
-		resources :services
-		resources :service_categories
+		  resources :profiles
+		  resources :services
+		  resources :service_categories
+      resources :service_details
     end
   end
 end

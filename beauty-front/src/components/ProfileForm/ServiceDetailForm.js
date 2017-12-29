@@ -18,9 +18,9 @@ class ServiceDetailForm extends Component {
             description: this.props.data.description,
             price: this.props.data.price,
             time: this.props.data.time,
-            id: this.props.serviceId,
+            service_id: this.props.serviceId,
             products: (this.props.data.products ? this.props.data.products : []),
-            images: []
+            photos: []
         };
     }
 
@@ -67,7 +67,7 @@ class ServiceDetailForm extends Component {
 
     handleAddPicture(image) {
         this.setState({
-            pictures: this.state.images.concat(image)
+            photos: this.state.photos.concat(image)
         });
     }
 

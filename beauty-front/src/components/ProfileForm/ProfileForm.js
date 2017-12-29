@@ -37,17 +37,17 @@ class ProfileForm extends Component {
 		let serviceData = this.state.service_details_attributes.find(x => x.id === serviceDetail.id)
 
 		if(!serviceData) {
-			const services = update(this.state.services, {
+			const service_details_attributes = update(this.state.service_details_attributes, {
       				$splice: [[0, 0, serviceDetail]]
     			})
 	    	this.setState({
-    				service_details_attributes: services
+    				service_details_attributes: service_details_attributes
     			})
 		} else {
-			const index = this.state.services.findIndex(x => x.id === serviceDetail.id)
-        	const services = update(this.state.services, { $splice: [[index, 0, serviceDetail]]})
+			const index = this.state.service_details_attributes.findIndex(x => x.id === serviceDetail.id)
+        	const service_details_attributes = update(this.state.service_details_attributes, { $splice: [[index, 0, serviceDetail]]})
         	this.setState({
-    				service_details_attributes: services
+    				service_details_attributes: service_details_attributes
     			})
 		}
   	}
@@ -59,6 +59,7 @@ class ProfileForm extends Component {
   	}
 
 	onClickSaveProfile() {
+		console.log(this.state)
 		axios.post('http://localhost:3001/api/v1/profiles', this.state)
   			.then(response => {
     			console.log(response)

@@ -110,7 +110,7 @@ class ProfileServicesForm extends Component {
 						<h3 key={ serviceCategory.id }>{ serviceCategory.name }</h3>
 						<ul key={`Ul${serviceCategory.id}`}>
 							{ 	serviceCategory.services.map((service) => {
-									let serviceData = this.state.selectedServicesData.find(x => x.id === service.id)
+									let serviceData = this.state.selectedServicesData.find(x => x.service_id === service.id)
 									return (
 										<div>
 											<li key={ service.id } onClick={ this.handleClick.bind(this, service.id) }>
