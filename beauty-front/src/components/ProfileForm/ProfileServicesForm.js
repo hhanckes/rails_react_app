@@ -96,13 +96,6 @@ class ProfileServicesForm extends Component {
                 })
     }
 
-    handleAddPicture(serviceId, image) {
-    	let serviceData = this.state.selectedServicesData.find(x => x.id === serviceId) || 
-        this.setState({
-            pictures: this.state.images.concat(image)
-        });
-    }
-
 	render() {
 		let services = this.state.services.map((serviceCategory) => {
 			return(
@@ -118,7 +111,7 @@ class ProfileServicesForm extends Component {
 											</li>
 											<Modal key={`Modal${service.id}`} show={ this.state.openModalId === service.id } onHide={ this.onCloseModal }>
 									          <Modal.Header closeButton>
-									            <Modal.Title>Agrear servicio de {service.name}</Modal.Title>
+									            <Modal.Title>Agrear servicio de { service.name }</Modal.Title>
 									          </Modal.Header>
 									          <ServiceDetailForm key={ service.name } serviceId={service.id} serviceName={ service.name } onSaveService={ this.handleAddService } 
 									            	data={serviceData ? serviceData : ''} onClose={ this.onCloseModal }/>

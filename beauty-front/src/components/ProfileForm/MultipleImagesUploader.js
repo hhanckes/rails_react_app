@@ -8,8 +8,8 @@ class MultipleImagesUploader extends Component {
         this.onDrop = this.onDrop.bind(this);
     }
 
-    onDrop(image) {
-        this.props.onAddPicture(image)
+    onDrop(images) {
+        this.props.onAddPicture(images)
     }
 
     render() {

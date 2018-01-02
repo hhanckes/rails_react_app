@@ -65,10 +65,30 @@ class ServiceDetailForm extends Component {
                 })
     }
 
-    handleAddPicture(image) {
-        this.setState({
-            photos: this.state.photos.concat(image)
-        });
+    handleAddPicture(photos) {
+        let aux = []
+        for (var i = 0; i < photos.length; i++) {
+            let photo = photos.item(i)
+            this.getBase64(photo, (photoBase64) => {
+                const photos = update(this.state.photos, {
+                    $push: [photoBase64]
+                })
+                this.setState({
+                    photos: photos
+                }, () => console.log(this.state.photos))
+            })
+        }
+    }
+
+    getBase64(file, callback) {
+        let reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = function () {
+            callback(reader.result)
+        };
+        reader.onerror = function (error) {
+            console.log('Error: ', error);
+        };
     }
 
     render() {

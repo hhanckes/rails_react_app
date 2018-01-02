@@ -6,7 +6,7 @@ module Api::V1
     def index
       @profiles = Profile.order 'id DESC'
 
-      render json: @profiles.to_json(include: :service_details)
+      render json: @profiles.to_json(include: { service_details: { include: :service } })
     end
 
     # GET /profiles/1
@@ -16,7 +16,11 @@ module Api::V1
 
     # POST /profiles
     def create
-      @profile = Profile.new(profile_params)
+      profile_data = profile_params
+      puts '*-2-*'
+      puts profile_data[:service_details_attributes][0][:photos]
+
+      @profile = Profile.new(profile_data)
 
       if @profile.save
         render json: @profile, status: :created
@@ -47,7 +51,7 @@ module Api::V1
 
       # Only allow a trusted parameter "white list" through.
       def profile_params
-        params.permit(:name, :brief, :restrictions, :picture, service_details_attributes: [:price, :description, :time, :service_id, photos: []])
+        params.permit(:name, :brief, :restrictions, :picture, service_details_attributes: [:price, :description, :time, :service_id, { photos: [] }])
       end
   end
 end

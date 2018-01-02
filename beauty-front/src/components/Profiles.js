@@ -26,12 +26,18 @@ class Profiles extends Component {
 		let profiles = this.state.profiles.map((profile) => {
 				return (
 					<div style={{borderBottom:'1px solid grey', padding:'10px'}}>
-						<p><img src={"http://localhost:3001"+profile.picture.url} /> {profile.name}</p>
+						<p><img src={"http://localhost:3001"+profile.picture.url} /> { profile.name }</p>
 						<p>Brief: {profile.brief}</p>
 						<p>Restrictions: </p>
 						<p>Services:</p>
 						<ul>
-							<li>A</li>
+							{
+								profile.service_details.map((service_detail) => {
+									return (
+										<li>{ service_detail.service ? service_detail.service.name : '' } : Precio { service_detail.price } + Tiempo { service_detail.time }</li>
+									)
+								})
+							}
 						</ul>
 						<p>Availabilities: </p>
 
