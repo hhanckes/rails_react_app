@@ -1,10 +1,9 @@
 //https://www.sitepoint.com/react-rails-5-1/
 
 import React, { Component } from 'react';
-import './App.css';
-import Menu from './components/Menu';
 import Helmet from "react-helmet";
-
+import Menu from './components/Menu';
+import './App.css';
 
 class App extends Component {
   render() {

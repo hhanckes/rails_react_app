@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "immutability-helper": "^2.6.0",
+    "j-toker": "0.0.10-beta3",
     "moment": "^2.19.3",
     "prop-types": "^15.6.0",
     "react": "^16.1.1",

@@ -20,7 +20,7 @@ class ServiceDetailForm extends Component {
             time: this.props.data.time,
             service_id: this.props.serviceId,
             products: (this.props.data.products ? this.props.data.products : []),
-            photos: []
+            service_detail_photos_attributes: []
         };
     }
 
@@ -66,16 +66,18 @@ class ServiceDetailForm extends Component {
     }
 
     handleAddPicture(photos) {
-        let aux = []
         for (var i = 0; i < photos.length; i++) {
             let photo = photos.item(i)
             this.getBase64(photo, (photoBase64) => {
-                const photos = update(this.state.photos, {
-                    $push: [photoBase64]
+                const photo = {
+                    photo: photoBase64
+                }
+                const photos = update(this.state.service_detail_photos_attributes, {
+                    $push: [photo]
                 })
                 this.setState({
-                    photos: photos
-                }, () => console.log(this.state.photos))
+                    service_detail_photos_attributes: photos
+                }, () => console.log(this.state.service_detail_photos_attributes))
             })
         }
     }

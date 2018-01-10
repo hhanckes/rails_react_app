@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import ServiceDetailForm from './ServiceDetailForm'
 import update from 'immutability-helper' //https://github.com/kolodny/immutability-helper
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 class ProfileServicesForm extends Component {
 	constructor(props) {
@@ -105,8 +105,8 @@ class ProfileServicesForm extends Component {
 							{ 	serviceCategory.services.map((service) => {
 									let serviceData = this.state.selectedServicesData.find(x => x.service_id === service.id)
 									return (
-										<div>
-											<li key={ service.id } onClick={ this.handleClick.bind(this, service.id) }>
+										<div key={ service.id }>
+											<li onClick={ this.handleClick.bind(this, service.id) }>
 												{ serviceData ?  '--> '+service.name : service.name }
 											</li>
 											<Modal key={`Modal${service.id}`} show={ this.state.openModalId === service.id } onHide={ this.onCloseModal }>
