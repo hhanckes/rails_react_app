@@ -13,20 +13,32 @@ class Profiles extends Component {
   		}
   	}
 
-  componentDidMount() {
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.fetch_url !== this.props.fetch_url) {
+		  	const id = nextProps.match.params.id === undefined ? '' : `/${nextProps.match.params.id}`
+			const fetch_url = nextProps.fetch_url+id
+	  	  	
+	  	  	axios.get(fetch_url)
+		  		.then(response => {
+		   			this.setState({profiles: response.data})
+		  		})
+		  		.catch(error => {
+		  			console.log(error)
+		  		})
+		}
+	}
 
-  	const id = this.props.match.params.id === undefined ? '' : `/${this.props.match.params.id}`
-	const fetch_url = this.props.fetch_url+id
-
-	console.log(fetch_url)
-	
-  	axios.get(fetch_url)
-  		.then(response => {
-   			this.setState({profiles: response.data})
-  		})
-  		.catch(error => {
-  			console.log(error)
-  		})
+	componentDidMount() {
+	  	const id = this.props.match.params.id === undefined ? '' : `/${this.props.match.params.id}`
+		const fetch_url = this.props.fetch_url+id
+		
+	  	axios.get(fetch_url)
+	  		.then(response => {
+	   			this.setState({profiles: response.data})
+	  		})
+	  		.catch(error => {
+	  			console.log(error)
+	  		})
 	}
 
 	render() {
