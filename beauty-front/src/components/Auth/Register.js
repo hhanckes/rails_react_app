@@ -1,7 +1,9 @@
 //Profiles.js
 import React, { Component } from 'react'
+import {Router, Redirect} from 'react-router'
 import Auth from 'j-toker'
 import { Panel, Button } from 'react-bootstrap';
+import OauthForm from './OauthForm'
 
 Auth.configure({
   apiUrl: 'http://localhost:3001/api/v1'
@@ -20,6 +22,20 @@ class Register extends Component {
   		}
   		this.handleInputChange = this.handleInputChange.bind(this)
   		this.handleRegistrationClick = this.handleRegistrationClick.bind(this)
+  		this.renderErrorMessage = this.renderErrorMessage.bind(this)
+  	}
+
+  	componentDidMount() {
+	    Auth.validateToken()
+			.then(function(user) {
+				console.log(user.email)
+		        this.setState({
+		          email: user.email
+		        })
+	      	})
+	      	.fail(function() {
+	      		console.log('fail')
+	      	})
   	}
 
   	handleInputChange(e) {
@@ -35,46 +51,63 @@ class Register extends Component {
 			config: this.props.config
     	})
     	.then((res) => {
-    		console.log(res)
 			alert('All Good')
 		})
-		.fail((e) => {
-			console.log(e)
-			alert('Error')
+		.fail((res) => {
+			this.setState({
+          		errors: res.data.errors
+        	})
 		})
   	}
 
+	renderSuccessMessage() {
+	    return (
+	      <p>Welcome {Auth.user.email}!</p>
+	    );
+	}
+
+	renderErrorMessage() {
+		return (
+			<p>There was an error: {this.state.errors.full_messages.join(', ')}</p>
+		);
+	}
+
 	render() {
 	    return (
-		<Panel header='Register by Email' bsStyle='info'>
-	        <form>
-	          <input type='email'
-	                name='email'
-	                label='Email'
-	                placeholder='Enter email...'
-	                value={this.state.email}
-	                onChange={this.handleInputChange} />
-	          <br />
-	          <input type='password'
-	                name='password'
-	                label='Password'
-	                placeholder='Enter password...'
-	                value={this.state.password}
-	                onChange={this.handleInputChange} />
-	          <br />
-	          <input type='password'
-	                name='password_confirmation'
-	                label='Password Confirmation'
-	                placeholder='Enter password again...'
-	                value={this.state.password_confirmation}
-	                onChange={this.handleInputChange} />
-	          <br />
-	          <Button className='btn btn-primary'
-	                  onClick={this.handleRegistrationClick}>
-	            Register
-	          </Button>
-	        </form>
-        </Panel>
+	    	<div>
+	    		{ this.state.email }
+	    		{ this.state.errors === null ? '' : this.renderErrorMessage() }
+			    <OauthForm />
+				<Panel header='Register by Email' bsStyle='info'>
+			        <form>
+			          <input type='email'
+			                name='email'
+			                label='Email'
+			                placeholder='Enter email...'
+			                value={this.state.email}
+			                onChange={this.handleInputChange} />
+			          <br />
+			          <input type='password'
+			                name='password'
+			                label='Password'
+			                placeholder='Enter password...'
+			                value={this.state.password}
+			                onChange={this.handleInputChange} />
+			          <br />
+			          <input type='password'
+			                name='password_confirmation'
+			                label='Password Confirmation'
+			                placeholder='Enter password again...'
+			                value={this.state.password_confirmation}
+			                onChange={this.handleInputChange} />
+			          <br />
+			          <Button className='btn btn-primary'
+			                  onClick={this.handleRegistrationClick}>
+			            Register
+			          </Button>
+			        </form>
+		        </Panel>
+		    </div>
 	    )
 	}
 }

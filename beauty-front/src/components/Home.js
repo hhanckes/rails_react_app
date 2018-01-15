@@ -1,5 +1,4 @@
 import React from 'react'
-import Register from './Auth/Register'
 
 const Home = () => (
   <div>

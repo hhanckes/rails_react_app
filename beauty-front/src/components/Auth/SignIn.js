@@ -2,6 +2,7 @@
 import React, { Component } from 'react'
 import Auth from 'j-toker'
 import { Panel, Button } from 'react-bootstrap';
+import OauthForm from './OauthForm'
 
 Auth.configure({
   apiUrl: 'http://localhost:3001/api/v1'
@@ -14,10 +15,12 @@ class SignIn extends Component {
   		this.state = {
     		email: '',
       		password: '',
-      		errors: null
+      		errors: null,
+      		signedIn: false
   		}
   		this.handleInputChange = this.handleInputChange.bind(this)
   		this.handleSignInClick = this.handleSignInClick.bind(this)
+  		this.renderErrorMessage = this.renderErrorMessage.bind(this)
   	}
 
   	handleInputChange(e) {
@@ -31,18 +34,35 @@ class SignIn extends Component {
 			config: this.props.config
     	})
     	.then((res) => {
-    		console.log(res)
-			alert('All Good')
+    		this.setState({
+          		signedIn: true
+        	})
 		})
-		.fail((e) => {
-			console.log(e)
-			alert('Error')
+		.fail((res) => {
+			this.setState({
+          		errors: res.data.errors
+        	})
 		})
   	}
+
+  	renderSuccessMessage() {
+	    return (
+	      <p>Welcome {Auth.user.email}!</p>
+	    );
+	}
+
+	renderErrorMessage() {
+		return (
+			<p>There was an error: {this.state.errors.join(', ')}</p>
+		);
+	}
 
 	render() {
 	    return (
 	    	<Panel header='Email Sign In' bsStyle='info'>
+	    		{ this.state.errors === null ? '' : this.renderErrorMessage() }
+	    		{ this.state.signedIn ? this.renderSuccessMessage() : '' }
+	    		<OauthForm /> <br />
 		        <form>
 		          <input type='email'
 		                name='email'
